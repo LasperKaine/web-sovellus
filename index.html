@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UniAteriat – Opiskelijaravintolat</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <nav class="navbar">
+          <a href="#" class="logo">UniAteriat</a>
+
+          <ul class="nav-menu">
+            <li><a href="#" class="nav-link active">Ravintolat</a></li>
+            <li><a href="#" class="nav-link">Kartta</a></li>
+            <li><a href="#" class="nav-link">Profiili</a></li>
+          </ul>
+
+          <div class="auth-buttons">
+            <a href="login.html" class="btn btn-outline">Kirjaudu sisään</a>
+            <a href="register.html" class="btn btn-primary">Rekisteröidy</a>
+          </div>
+          <button class="hamburger" aria-label="Avaa valikko">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="restaurants-section">
+        <div class="container">
+          <h1>Suomen opiskelijaravintolat</h1>
+
+          <!-- Filters -->
+          <div class="filters">
+            <div class="filter-group">
+              <label for="city">Kaupunki</label>
+              <select id="city" class="filter-select">
+                <option value="">Kaikki kaupungit</option>
+                <option value="Helsinki">Helsinki</option>
+                <option value="Espoo">Espoo</option>
+                <option value="Vantaa">Vantaa</option>
+                <option value="Tampere">Tampere</option>
+                <option value="Turku">Turku</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <label for="provider">Palveluntarjoaja</label>
+              <select id="provider" class="filter-select">
+                <option value="">Kaikki</option>
+                <option value="Unicafe">Unicafe</option>
+                <option value="Sodexo">Sodexo</option>
+                <option value="Fazer">Fazer</option>
+                <option value="Juvenes">Juvenes</option>
+              </select>
+            </div>
+
+            <div class="search-group">
+              <label for="search">Haku</label>
+              <input
+                type="text"
+                id="search"
+                class="search-input"
+                placeholder="Hae ravintolaa tai ruokaa..."
+              />
+            </div>
+
+            <button class="btn btn-outline favorites-btn">Suosikit (0)</button>
+          </div>
+
+          <!-- Cards -->
+          <div class="restaurant-grid">
+            <article class="restaurant-card">
+              <div class="card-image">
+                <span class="plate-icon"></span>
+              </div>
+              <div class="card-body">
+                <h3>Unicafe Exactum</h3>
+                <p class="location">Helsinki • Kumpula</p>
+                <p class="menu-today">Tänään: Kasvislasagne, Kana-curry</p>
+                <button class="btn btn-primary card-btn">
+                  Näytä ruokalista
+                </button>
+              </div>
+            </article>
+
+            <article class="restaurant-card">
+              <div class="card-image">
+                <span class="plate-icon"></span>
+              </div>
+              <div class="card-body">
+                <h3>Sodexo Kampusareena</h3>
+                <p class="location">Espoo • Otaniemi</p>
+                <p class="menu-today">Tänään: Lohikeitto, Kasvismakkara</p>
+                <button class="btn btn-primary card-btn">
+                  Näytä ruokalista
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>UniAteriat • Web-sovelluskehitys - Yksilötehtävä</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('register-modal')">✕</button>
+            <h2>Rekisteröidy</h2>
+            
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="reg-name">Koko nimi</label>
+                    <input type="text" id="reg-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Sähköposti</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Salasana</label>
+                    <input type="password" id="reg-password" minlength="6" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password2">Toista salasana</label>
+                    <input type="password" id="reg-password2" minlength="6" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full">Luo tili</button>
+            </form>
+
+            <p class="modal-switch">
+                Onko sinulla jo tili? 
+                <a href="#">Kirjaudu sisään</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

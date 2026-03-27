@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('login-modal')">✕</button>
+            <h2>Kirjaudu sisään</h2>
+            
+            <form class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Sähköposti</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Salasana</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-full">Kirjaudu sisään</button>
+            </form>
+
+            <p class="modal-switch">
+                Ei tiliä vielä? 
+                <a href="#">Rekisteröidy</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
