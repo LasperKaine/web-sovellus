@@ -10,17 +10,17 @@
     <header class="header">
       <div class="container">
         <nav class="navbar">
-          <a href="#" class="logo">UniAteriat</a>
+          <a href="index.html" class="logo">UniAteriat</a>
 
           <ul class="nav-menu">
-            <li><a href="#" class="nav-link active">Ravintolat</a></li>
-            <li><a href="#" class="nav-link">Kartta</a></li>
-            <li><a href="#" class="nav-link">Profiili</a></li>
+            <li><a href="#" class="nav-link active" data-page="restaurants">Ravintolat</a></li>
+            <li><a href="#" class="nav-link" data-page="map">Kartta</a></li>
+            <li><a href="#" class="nav-link" data-page="profile">Profiili</a></li>
           </ul>
 
-          <div class="auth-buttons">
-            <a href="login.html" class="btn btn-outline">Kirjaudu sisään</a>
-            <a href="register.html" class="btn btn-primary">Rekisteröidy</a>
+          <div class="auth-buttons" id="authButtons">
+            <button class="btn btn-outline" id="loginBtn">Kirjaudu sisään</button>
+            <button class="btn btn-primary" id="registerBtn">Rekisteröidy</button>
           </div>
           <button class="hamburger" aria-label="Avaa valikko">
             <span></span>
@@ -31,22 +31,17 @@
       </div>
     </header>
 
-    <main>
-      <section class="restaurants-section">
+    <main id="mainContent">
+      <!-- Restaurants Page -->
+      <section id="restaurantsPage" class="restaurants-section">
         <div class="container">
           <h1>Suomen opiskelijaravintolat</h1>
 
-          <!-- Filters -->
           <div class="filters">
             <div class="filter-group">
               <label for="city">Kaupunki</label>
               <select id="city" class="filter-select">
                 <option value="">Kaikki kaupungit</option>
-                <option value="Helsinki">Helsinki</option>
-                <option value="Espoo">Espoo</option>
-                <option value="Vantaa">Vantaa</option>
-                <option value="Tampere">Tampere</option>
-                <option value="Turku">Turku</option>
               </select>
             </div>
 
@@ -54,10 +49,6 @@
               <label for="provider">Palveluntarjoaja</label>
               <select id="provider" class="filter-select">
                 <option value="">Kaikki</option>
-                <option value="Unicafe">Unicafe</option>
-                <option value="Sodexo">Sodexo</option>
-                <option value="Fazer">Fazer</option>
-                <option value="Juvenes">Juvenes</option>
               </select>
             </div>
 
@@ -67,51 +58,152 @@
                 type="text"
                 id="search"
                 class="search-input"
-                placeholder="Hae ravintolaa tai ruokaa..."
+                placeholder="Hae ravintolaa..."
               />
             </div>
 
-            <button class="btn btn-outline favorites-btn">Suosikit (0)</button>
+            <button class="btn btn-outline" id="favoritesBtn">Suosikit (<span id="favoriteCount">0</span>)</button>
           </div>
 
-          <!-- Cards -->
-          <div class="restaurant-grid">
-            <article class="restaurant-card">
-              <div class="card-image">
-                <span class="plate-icon"></span>
-              </div>
-              <div class="card-body">
-                <h3>Unicafe Exactum</h3>
-                <p class="location">Helsinki • Kumpula</p>
-                <p class="menu-today">Tänään: Kasvislasagne, Kana-curry</p>
-                <button class="btn btn-primary card-btn">
-                  Näytä ruokalista
-                </button>
-              </div>
-            </article>
+          <div class="restaurant-grid" id="restaurantGrid"></div>
+        </div>
+      </section>
 
-            <article class="restaurant-card">
-              <div class="card-image">
-                <span class="plate-icon"></span>
-              </div>
-              <div class="card-body">
-                <h3>Sodexo Kampusareena</h3>
-                <p class="location">Espoo • Otaniemi</p>
-                <p class="menu-today">Tänään: Lohikeitto, Kasvismakkara</p>
-                <button class="btn btn-primary card-btn">
-                  Näytä ruokalista
-                </button>
-              </div>
-            </article>
-          </div>
+      <!-- Map Page -->
+      <section id="mapPage" class="map-section" style="display: none;">
+        <div class="container">
+          <h1>Ravintolat kartalla</h1>
+          <div id="map" class="map-container"></div>
+        </div>
+      </section>
+
+      <!-- Profile Page -->
+      <section id="profilePage" class="profile-section" style="display: none;">
+        <div class="container">
+          <h1>Oma profiili</h1>
+          <div id="profileContent"></div>
         </div>
       </section>
     </main>
+
+    <!-- Menu Modal -->
+    <div id="menuModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <button class="modal-close" id="menuModalClose">✕</button>
+        <h2 id="menuModalTitle"></h2>
+        
+        <div class="menu-tabs">
+          <button class="tab-btn active" data-menu="daily">Päivän ruokalista</button>
+          <button class="tab-btn" data-menu="weekly">Viikon ruokalista</button>
+        </div>
+
+        <div id="dailyMenuContent" class="menu-content active"></div>
+        <div id="weeklyMenuContent" class="menu-content"></div>
+
+        <div class="modal-actions">
+          <button class="btn btn-outline" id="addFavoriteBtn">Lisää suosikkeiksi</button>
+          <button class="btn btn-primary" id="removeFromFavoritesBtn" style="display: none;">Poista suosikeista</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <button class="modal-close" id="loginModalClose">✕</button>
+        <h2>Kirjaudu sisään</h2>
+        
+        <form class="auth-form" id="loginForm">
+          <div class="form-group">
+            <label for="loginUsername">Käyttäjänimi</label>
+            <input type="text" id="loginUsername" required>
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Salasana</label>
+            <input type="password" id="loginPassword" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-full">Kirjaudu sisään</button>
+        </form>
+
+        <p class="modal-switch">
+          Ei tiliä vielä? 
+          <a href="#" id="switchToRegister">Rekisteröidy</a>
+        </p>
+        <div id="loginError" class="error-message"></div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <button class="modal-close" id="registerModalClose">✕</button>
+        <h2>Rekisteröidy</h2>
+        
+        <form class="auth-form" id="registerForm">
+          <div class="form-group">
+            <label for="regUsername">Käyttäjänimi</label>
+            <input type="text" id="regUsername" required>
+            <span id="usernameCheck" class="availability-check"></span>
+          </div>
+          <div class="form-group">
+            <label for="regEmail">Sähköposti</label>
+            <input type="email" id="regEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="regPassword">Salasana</label>
+            <input type="password" id="regPassword" minlength="6" required>
+          </div>
+          <div class="form-group">
+            <label for="regPassword2">Toista salasana</label>
+            <input type="password" id="regPassword2" minlength="6" required>
+          </div>
+          <button type="submit" class="btn btn-primary w-full">Luo tili</button>
+        </form>
+
+        <p class="modal-switch">
+          Onko sinulla jo tili? 
+          <a href="#" id="switchToLogin">Kirjaudu sisään</a>
+        </p>
+        <div id="registerError" class="error-message"></div>
+      </div>
+    </div>
+
+    <!-- Profile Edit Modal -->
+    <div id="profileEditModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <button class="modal-close" id="profileEditClose">✕</button>
+        <h2>Muokkaa profiilia</h2>
+        
+        <form class="auth-form" id="profileEditForm">
+          <div class="form-group">
+            <label for="editUsername">Käyttäjänimi</label>
+            <input type="text" id="editUsername" required>
+          </div>
+          <div class="form-group">
+            <label for="editEmail">Sähköposti</label>
+            <input type="email" id="editEmail" required>
+          </div>
+          <div class="form-group">
+            <label for="editPassword">Uusi salasana (jätä tyhjäksi, jos et halua muuttaa)</label>
+            <input type="password" id="editPassword">
+          </div>
+          <div class="form-group">
+            <label for="avatarUpload">Profiilikuva</label>
+            <input type="file" id="avatarUpload" accept="image/*">
+          </div>
+          <button type="submit" class="btn btn-primary w-full">Tallenna muutokset</button>
+        </form>
+
+        <div id="profileEditError" class="error-message"></div>
+      </div>
+    </div>
 
     <footer class="footer">
       <div class="container">
         <p>UniAteriat • Web-sovelluskehitys - Yksilötehtävä</p>
       </div>
     </footer>
+
+    <script src="app.js"></script>
   </body>
 </html>
