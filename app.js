@@ -272,26 +272,25 @@ async function loadWeeklyMenu(restaurantId) {
     console.log('Weekly menu data:', data);
 
     if (data.days && data.days.length > 0) {
-      content.innerHTML = data.days.map(day => {
-        // Parse date safely
-        let dateObj;
-        if (day.date) {
-          dateObj = new Date(day.date);
-          if (isNaN(dateObj.getTime())) {
-            dateObj = new Date();
-          }
-        } else {
-          dateObj = new Date();
-        }
-
-        const dateString = dateObj.toLocaleDateString('fi-FI', { 
+      // Generate dates starting from Monday of current week
+      const today = new Date();
+      const monday = new Date(today);
+      monday.setDate(today.getDate() - today.getDay() + 1); // Get Monday
+      
+      let html = '';
+      
+      data.days.forEach((day, index) => {
+        // Calculate date for this day (Monday + index)
+        const currentDate = new Date(monday);
+        currentDate.setDate(monday.getDate() + index);
+        
+        const dateString = currentDate.toLocaleDateString('fi-FI', { 
           weekday: 'long', 
           month: 'long', 
-          day: 'numeric',
-          year: 'numeric'
+          day: 'numeric'
         });
-
-        return `
+        
+        html += `
           <div class="menu-day">
             <div class="menu-day-title">${dateString}</div>
             ${day.courses && day.courses.length > 0 ? 
@@ -306,7 +305,9 @@ async function loadWeeklyMenu(restaurantId) {
             }
           </div>
         `;
-      }).join('');
+      });
+      
+      content.innerHTML = html;
     } else {
       content.innerHTML = '<p>Viikon ruokalista ei saatavilla.</p>';
     }
