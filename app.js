@@ -820,13 +820,13 @@ function initializeMap() {
     popupAnchor: [0, -48]
   });
 
-  // Light purple marker for nearest restaurant
-  const highlightedIcon = L.icon({
-    iconUrl: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAzNiIgZmlsbD0iIzhhNWNmNiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjQ4Ij48cGF0aCBkPSJNMTIgMEM2LjUgMCAyIDQuNSAyIDEwYzogNyAxMCAyNSAxMCAyNXMxMC0xOCAxMC0yNWMwLTUuNS00LjUtMTAtMTAtMTB6TTEyIDE0Yy0yLjIgMC00LTEuOC00LTRzMS44LTQgNC00IDQgMS44IDQgNGMwIDIuMi0xLjggNC00IDR6Ii8+PC9zdmc+',
-    iconSize: [40, 56],
-    iconAnchor: [20, 56],
-    popupAnchor: [0, -56]
-  });
+// Light purple marker for nearest restaurant
+const highlightedIcon = L.icon({
+  iconUrl: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAzNiIgZmlsbD0iIzhhNWNmNiIgd2lkdGg9IjMyIiBoZWlnaHQ9IjQ4Ij48cGF0aCBkPSJNMTIgMEM2LjUgMCAyIDQuNSAyIDEwYzAgNyAxMCAyNSAxMCAyNXMxMC0xOCAxMC0yNWMwLTUuNS00LjUtMTAtMTAtMTB6TTEyIDE0Yy0yLjIgMC00LTEuOC00LTRzMS44LTQgNC00IDQgMS44IDQgNGMwIDIuMi0xLjggNC00IDR6Ii8+PC9zdmc+',
+  iconSize: [40, 56],
+  iconAnchor: [20, 56],
+  popupAnchor: [0, -56]
+});
 
   // Add markers for all restaurants
   function setMapMarkers() {
