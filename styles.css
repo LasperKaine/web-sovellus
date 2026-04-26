@@ -232,6 +232,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 28px;
+  align-items: stretch;
 }
 
 .restaurant-card {
@@ -244,6 +245,9 @@ h3 {
     box-shadow 0.25s;
   cursor: pointer;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  font-size: 5rem;
 }
 
 .restaurant-card:hover {
@@ -252,7 +256,7 @@ h3 {
 }
 
 .restaurant-card.favorite::after {
-  content: "★";
+  content: "*";
   position: absolute;
   top: 12px;
   right: 12px;
@@ -268,14 +272,19 @@ h3 {
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.9);
+  flex-shrink: 0;
 }
 
 .plate-icon {
-  font-size: 3.8rem;
+  font-size: 5.8rem;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .card-body {
   padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .card-body h3 {
@@ -294,12 +303,14 @@ h3 {
   color: #333;
   font-size: 1rem;
   min-height: 2.4rem;
+  flex-grow: 1;
 }
 
 .card-btn {
   width: 100%;
   padding: 12px;
   font-size: 1rem;
+  margin-top: auto;
 }
 
 /* Footer */
@@ -466,7 +477,7 @@ h3 {
   color: var(--error);
 }
 
-/* Menu Modal Specific */
+/* Menu Modal */
 .menu-tabs {
   display: flex;
   gap: 10px;
@@ -551,9 +562,28 @@ h3 {
   width: 100%;
   height: 600px;
   border-radius: 8px;
-  background-color: white;
   box-shadow: 0 4px 12px rgba(92, 45, 145, 0.1);
   margin-top: 20px;
+  overflow: hidden;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .map-container {
+    height: 400px;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map-container {
+    height: 300px;
+  }
 }
 
 /* Profile */
@@ -641,6 +671,14 @@ h3 {
     display: flex;
   }
 
+  .navbar {
+    padding: 0 16px;
+  }
+
+  .logo {
+    font-size: 1.4rem;
+  }
+
   .navbar.mobile-menu-open .nav-menu {
     display: flex;
     position: absolute;
@@ -652,16 +690,18 @@ h3 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
     z-index: 99;
+    gap: 15px;
   }
 
   .navbar.mobile-menu-open .auth-buttons {
     display: flex;
     position: absolute;
-    top: calc(70px + 200px);
+    top: calc(70px + 180px);
     left: 20px;
     right: 20px;
     flex-direction: column;
     gap: 10px;
+    z-index: 99;
   }
 
   .navbar.mobile-menu-open .auth-buttons button {
@@ -672,32 +712,40 @@ h3 {
     flex-direction: column;
   }
 
+  .filter-group {
+    width: 100%;
+  }
+
   .filter-select,
   .search-input {
     width: 100%;
   }
 
   .search-group {
-    min-width: 100%;
+    width: 100%;
   }
 
   .restaurant-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   h1 {
     font-size: 1.6rem;
+    margin-bottom: 20px;
   }
 
   .modal-content {
-    width: 90%;
-    padding: 24px;
+    width: 95%;
+    padding: 20px;
+    max-height: 85vh;
   }
 
   .profile-header {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    gap: 20px;
   }
 
   .profile-avatar {
@@ -707,27 +755,82 @@ h3 {
 
   .profile-actions {
     flex-direction: column;
+    gap: 10px;
+  }
+
+  .profile-actions .btn {
+    width: 100%;
   }
 
   .map-container {
     height: 400px;
   }
+
+  .container {
+    padding: 0 16px;
+  }
 }
 
 @media (max-width: 480px) {
   .logo {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .nav-menu {
+    gap: 16px;
   }
 
   h1 {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
   }
 
   .modal-content {
-    max-width: 100%;
+    width: 98%;
+    padding: 16px;
   }
 
   .restaurant-grid {
-    gap: 16px;
+    gap: 12px;
+  }
+
+  .card-body {
+    padding: 16px;
+  }
+
+  .card-btn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    font-size: 0.95rem;
+  }
+
+  .filter-group label {
+    font-size: 0.8rem;
+  }
+
+  .filters {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .map-container {
+    height: 300px;
+  }
+
+  .profile-card {
+    padding: 20px;
+  }
+
+  .menu-tabs {
+    gap: 8px;
+  }
+
+  .tab-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
   }
 }
