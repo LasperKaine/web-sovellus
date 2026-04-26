@@ -21,12 +21,7 @@ html {
 }
 
 body {
-  font-family:
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   background-color: var(--background);
   color: var(--text);
   line-height: 1.6;
@@ -52,6 +47,7 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 70px;
+  padding: 0 24px;
 }
 
 .logo {
@@ -60,6 +56,8 @@ body {
   color: var(--primary);
   text-decoration: none;
   transition: 0.2s;
+  white-space: nowrap;
+  margin-right: 40px;
 }
 
 .logo:hover {
@@ -70,6 +68,9 @@ body {
   display: flex;
   list-style: none;
   gap: 32px;
+  margin: 0;
+  padding: 0;
+  flex: 1;
 }
 
 .nav-link {
@@ -78,6 +79,7 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: 0.2s;
+  white-space: nowrap;
 }
 
 .nav-link:hover,
@@ -88,10 +90,12 @@ body {
 .auth-buttons {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .auth-buttons button {
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .btn {
@@ -137,6 +141,8 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+  padding: 8px;
+  margin-left: 12px;
 }
 
 .hamburger span {
@@ -240,14 +246,11 @@ h3 {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 6px 16px rgba(92, 45, 145, 0.1);
-  transition:
-    transform 0.25s,
-    box-shadow 0.25s;
+  transition: transform 0.25s, box-shadow 0.25s;
   cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;
-  font-size: 5rem;
 }
 
 .restaurant-card:hover {
@@ -276,8 +279,8 @@ h3 {
 }
 
 .plate-icon {
-  font-size: 5.8rem;
-  color: rgba(255, 255, 255, 0.9);
+  font-size: 3.8rem;
+  color: white;
 }
 
 .card-body {
@@ -565,6 +568,8 @@ h3 {
   box-shadow: 0 4px 12px rgba(92, 45, 145, 0.1);
   margin-top: 20px;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 }
 
 #map {
@@ -573,17 +578,13 @@ h3 {
   border-radius: 8px;
 }
 
-@media (max-width: 768px) {
-  .map-container {
-    height: 400px;
-    margin-top: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .map-container {
-    height: 300px;
-  }
+.nearest-info-box {
+  background: white;
+  padding: 16px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(92, 45, 145, 0.15);
+  border-left: 4px solid var(--primary);
 }
 
 /* Profile */
@@ -661,51 +662,63 @@ h3 {
   text-align: center;
 }
 
-/* Responsive */
+/* Responsive - Tablet */
 @media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
   .navbar {
     padding: 0 16px;
   }
 
   .logo {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-right: 20px;
   }
 
-  .navbar.mobile-menu-open .nav-menu {
-    display: flex;
-    position: absolute;
+  .nav-menu {
+    display: none;
+    position: fixed;
     top: 70px;
     left: 0;
     right: 0;
     flex-direction: column;
     background: white;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    z-index: 99;
+    padding: 20px 24px;
     gap: 15px;
+    z-index: 98;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+  }
+
+  .navbar.mobile-menu-open .nav-menu {
+    display: flex;
+  }
+
+  .auth-buttons {
+    display: flex !important;
+    position: static;
+    gap: 10px;
+    margin-left: auto;
+    margin-right: 0;
+    flex-direction: row;
+    z-index: auto;
+    left: auto;
+    right: auto;
+    top: auto;
   }
 
   .navbar.mobile-menu-open .auth-buttons {
+    position: static;
     display: flex;
-    position: absolute;
-    top: calc(70px + 180px);
-    left: 20px;
-    right: 20px;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 99;
   }
 
-  .navbar.mobile-menu-open .auth-buttons button {
-    width: 100%;
+  .auth-buttons button {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .hamburger {
+    display: flex;
   }
 
   .filters {
@@ -764,20 +777,56 @@ h3 {
 
   .map-container {
     height: 400px;
+    margin-top: 16px;
   }
 
   .container {
     padding: 0 16px;
   }
-}
 
-@media (max-width: 480px) {
-  .logo {
-    font-size: 1.2rem;
+  .btn {
+    padding: 10px 16px;
+    font-size: 0.95rem;
   }
 
-  .nav-menu {
-    gap: 16px;
+  .filter-group label {
+    font-size: 0.8rem;
+  }
+
+  .filters {
+    padding: 16px;
+    gap: 12px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0 12px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+    margin-right: 12px;
+  }
+
+  .hamburger {
+    padding: 6px;
+    margin-left: 8px;
+  }
+
+  .hamburger span {
+    width: 22px;
+    height: 2.5px;
+  }
+
+  .auth-buttons {
+    gap: 6px;
+  }
+
+  .auth-buttons button {
+    padding: 6px 10px;
+    font-size: 0.75rem;
   }
 
   h1 {
@@ -804,7 +853,16 @@ h3 {
   }
 
   .btn {
-    padding: 10px 16px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    padding: 10px 12px;
+  }
+
+  .nav-link {
     font-size: 0.95rem;
   }
 
